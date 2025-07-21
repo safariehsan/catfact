@@ -17,6 +17,7 @@ root.render(
         <Route path="/list" element={<List />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="list/:length" element={<Detail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
