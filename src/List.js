@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router";
+import Pagination from "./Pagination";
 
 const List = () => {
   const [facts, setFacts] = useState([]);
-  const [images, setImages] = useState([]);
   const getFacts = async () => {
     try {
       const response = await axios.get("https://catfact.ninja/facts");
@@ -15,50 +15,37 @@ const List = () => {
       console.error(error);
     }
   };
-  const getCatsImages = async () => {
-    try {
-      const response = await axios.get("https://placekittens.com/g/300/200", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
-      console.log(response);
-      setFacts(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
     getFacts();
-    getCatsImages();
   }, []);
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 py-8 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           List of Cat Facts
         </h2>
-        <div>
+        <div className="my-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {facts.data && facts.data.length > 0 ? (
             facts.data.map((fact) => (
-              <div key={fact.id} className="group relative">
-                {/* <img
-                    alt={product.imageAlt}
-                    src={product.imageSrc}
-                    className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
-                  /> */}
-                <div className="mt-4 flex justify-between">
-                  <div>
+              <div
+                key={fact.length}
+                className="group relative border border-gray-200 rounded-lg shadow-md hover:bg-cyan-50 hover:shadow-xl transition-shadow duration-300"
+              >
+                <Link to={`/list/${fact.length}`}>
+                  <img
+                    class="rounded-t-lg"
+                    src="https://placekittens.com/g/300/300"
+                    alt=""
+                  />
+                  <div className="mt-4 p-4 pt-0">
+                    <b className="text-md text-gray-500">{fact.length}</b>
                     <h3 className="text-sm text-gray-700">
-                      <Link to={`/list/${fact.length}`}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {fact.fact}
-                      </Link>
+                      <span aria-hidden="true" className="inset-0 one-line" />
+                      {fact.fact}
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{fact.length}</p>
                   </div>
-                </div>
+                </Link>
               </div>
             ))
           ) : (
@@ -67,6 +54,7 @@ const List = () => {
             </div>
           )}
         </div>
+        <Pagination />
       </div>
     </div>
   );
