@@ -8,7 +8,11 @@ const List = () => {
   const [facts, setFacts] = useState([]);
   const getFacts = async () => {
     try {
-      const response = await axios.get("https://catfact.ninja/facts");
+      const response = await axios.get("https://catfact.ninja/facts", {
+        params: {
+          limit: 12,
+        },
+      });
       console.log(response);
       setFacts(response.data);
     } catch (error) {
@@ -34,14 +38,13 @@ const List = () => {
               >
                 <Link to={`/list/${fact.length}`}>
                   <img
-                    class="rounded-t-lg"
-                    src="https://placekittens.com/g/300/300"
+                    className="rounded-t-lg"
+                    src="https://placekittens.com/200/300"
                     alt=""
                   />
                   <div className="mt-4 p-4 pt-0">
-                    <b className="text-md text-gray-500">{fact.length}</b>
-                    <h3 className="text-sm text-gray-700">
-                      <span aria-hidden="true" className="inset-0 one-line" />
+                    <b className="text-md text-cyan-600">{fact.length}</b>
+                    <h3 className="text-sm text-gray-700 truncate">
                       {fact.fact}
                     </h3>
                   </div>
