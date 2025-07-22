@@ -6,22 +6,31 @@ import Pagination from "./Pagination";
 
 const List = () => {
   const [facts, setFacts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(12);
   const getFacts = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("https://catfact.ninja/facts", {
         params: {
-          limit: 12,
+          limit: perPage,
+          page: currentPage,
         },
       });
       console.log(response);
       setFacts(response.data);
+      setTotal(response.data.total);
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
     getFacts();
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="bg-white">
@@ -30,8 +39,8 @@ const List = () => {
           List of Cat Facts
         </h2>
         <div className="my-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {facts.data && facts.data.length > 0 ? (
-            facts.data.map((fact) => (
+          {!loading ? (
+            facts.data?.map((fact) => (
               <div
                 key={fact.length}
                 className="group relative border border-gray-200 rounded-lg shadow-md hover:bg-cyan-50 hover:shadow-xl transition-shadow duration-300"
@@ -57,7 +66,12 @@ const List = () => {
             </div>
           )}
         </div>
-        <Pagination />
+        <Pagination
+          total={total}
+          perPage={12}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );

@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.one-line {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.pagination {
+  @apply flex items-center justify-between bg-white px-4 py-3 sm:px-6;
+}
+.pagination .page-item {
+  @apply relative inline-flex items-center cursor-pointer px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-100;
+}
+.pagination .page-item.active {
+  @apply z-10 bg-cyan-50 border-cyan-500 text-cyan-600;
+}
+.pagination .page-item.disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+.pagination .page-item .page-link {
+  @apply relative inline-flex items-center font-medium text-gray-700 bg-white hover:bg-gray-50;
+}
+.pagination .page-item .page-link:hover {
+  @apply bg-gray-50;
 }
