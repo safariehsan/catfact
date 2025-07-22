@@ -67,6 +67,7 @@ const List = () => {
           )}
         </div>
         <Pagination
+          list={facts.data}
           total={total}
           perPage={12}
           setCurrentPage={setCurrentPage}
