@@ -38,7 +38,7 @@ const Contact = () => {
             </div>
           </div>
           <Link
-            to="/list"
+            to="/facts"
             className="inline-flex items-center w-fit px-3 py-2 text-sm hover:text-white font-medium text-center text-gray-700 bg-gray-200 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             <svg

@@ -1,16 +1,18 @@
 import React from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Link, useLocation } from "react-router";
 
 const Detail = () => {
   let { length } = useParams();
+  const location = useLocation();
+  const fact = location.state?.fact;
   return (
     <div className="flex h-screen">
       <div className="m-auto">
         <div className="flex flex-row bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg"
-            src="https://placekittens.com/200/300"
-            alt=""
+            src="https://placecats.com/300/200"
+            alt="cat"
           />
           <div className="p-5 flex flex-col justify-between">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -18,11 +20,10 @@ const Detail = () => {
             </h5>
 
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              Here are the biggest enterprise technology acquisitions of 2021 so
-              far, in reverse chronological order.
+              {fact}
             </p>
             <Link
-              to="/list"
+              to="/facts"
               className="inline-flex items-center w-fit px-3 py-2 text-sm hover:text-white font-medium text-center text-gray-700 bg-gray-200 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg

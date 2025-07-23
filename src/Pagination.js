@@ -45,8 +45,8 @@ export default function Pagination({
             key={number}
             onClick={(e) => paginate(number, e)}
             href="!#"
-            className={`relative inline-flex border items-center px-2 py-1 text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 ${
-              currentPage === number ? "bg-cyan-200" : ""
+            className={`relative inline-flex border items-center px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 ${
+              currentPage === number ? "bg-sky-300" : ""
             }`}
           >
             {number}
@@ -71,7 +71,10 @@ export default function Pagination({
           Last
         </a>
       </nav>
-      <p className="text-md text-gray-700 mt-4">
+      <p className="mt-4">
+        <span>Page</span> <b>{currentPage}</b> of <span>{pageCount}</span>
+      </p>
+      <p className="text-md text-gray-700">
         Showing <span className="font-medium">{indexOfFirstFact + 1}</span> to{" "}
         <span className="font-medium">{Math.min(indexOfLastFact, total)}</span>{" "}
         of <span className="font-medium">{total}</span> results
